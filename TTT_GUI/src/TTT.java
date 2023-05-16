@@ -1,19 +1,14 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import java.awt.Font;
 
 public class TTT {
@@ -22,18 +17,21 @@ public class TTT {
 	
 	private String startGame = "X";
 	
-	//if winner = 1, game has been won by X. Else if winner = 2, game has been won by O.
+	//if winner = 1, game has been won by X. Else if winner = 2, game has been won by O. Else if winner = 3, board is full
 	int winner = 0;
+	//keeps track of turns
+	int turn;
 	
-	private JLabel B1;
-	private JLabel B2;
-	private JLabel B3;
-	private JLabel B4;
-	private JLabel B5;
-	private JLabel B6;
-	private JLabel B7;
-	private JLabel B8;
-	private JLabel B9;
+	//Strings to keep track of what symbol is in what grid spot
+	String b1 = "";
+	String b2 = "";
+	String b3 = "";
+	String b4 = "";
+	String b5 = "";
+	String b6 = "";
+	String b7 = "";
+	String b8 = "";
+	String b9 = "";
 	
 
 	/**
@@ -74,15 +72,6 @@ public class TTT {
 	 */
 	public void WonGame()
 	{
-		String b1 = B1.getText();
-		String b2 = B2.getText();
-		String b3 = B3.getText();
-		String b4 = B4.getText();
-		String b5 = B5.getText();
-		String b6 = B6.getText();
-		String b7 = B7.getText();
-		String b8 = B8.getText();
-		String b9 = B9.getText();
 		
 		//All possible X wins
 		if( b1 == "X" && b2 == "X" && b3 =="X")
@@ -120,27 +109,31 @@ public class TTT {
 		else if( b3 == "O" && b5 == "O" && b7 =="O")
 			winner = 1;
 		
-		displayWinner();
+		//If board is full, no one wins and winner value is 3
+		else if ((b1 == "" && b2 == "" && b3 == "" && b4 == "" && b5 == "" && b6 == "" && b7 == "" && b8 == "" && b9 == "") && (turn >= 1))
+			winner = 3;
+		
+		if( winner > 0)
+			displayWinner();
 	}
 	
-	//Displays the Winner
+	//Displays the Winner based on the winner variable being 1 for X or 2 for O
 	public void displayWinner() {
 		if ( winner == 1)
 			JOptionPane.showMessageDialog( frame, "Player X Wins!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 		else if ( winner == 2)
 			JOptionPane.showMessageDialog( frame, "Player O Wins!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
-
-
+		else if ( winner == 3)
+			JOptionPane.showMessageDialog( frame, "No player won. Board is full", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 	}
+
 	
-	/**
-	 * Does literally nothing
-	 */
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//settings for the window
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -151,6 +144,16 @@ public class TTT {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(3, 3, 0, 0));
 		
+		
+		//all JPanels and their buttons.
+		/**
+		 * The Buttons work like this
+		 * 
+		 * 1. Check if there is an X or O
+		 * 		if an X or O is there, then it doesn't allow a move and tells the player
+		 * 2. if there isn't an X or O, it places the X or O, swaps symbols for next turnand then places the symbol on the b string vriable
+		 * 		then checks if the player won the game.
+		 */
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.add(panel_1);
@@ -164,12 +167,16 @@ public class TTT {
 				}
 				else {
 					B1.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B1.setForeground(Color.RED);
+						b1 = "X";
+					}
 					else
 						B1.setForeground(Color.BLUE);
+						b1 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -189,12 +196,16 @@ public class TTT {
 				}
 				else {
 					B2.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B2.setForeground(Color.RED);
+						b2 = "X";
+					}
 					else
 						B2.setForeground(Color.BLUE);
+						b2 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -214,12 +225,16 @@ public class TTT {
 				}
 				else {
 					B3.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B3.setForeground(Color.RED);
+						b3 = "X";
+					}
 					else
 						B3.setForeground(Color.BLUE);
+						b3 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -239,12 +254,16 @@ public class TTT {
 				}
 				else {
 					B4.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B4.setForeground(Color.RED);
+						b4 = "X";
+					}
 					else
 						B4.setForeground(Color.BLUE);
+						b4 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -264,12 +283,16 @@ public class TTT {
 				}
 				else {
 					B5.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B5.setForeground(Color.RED);
+						b5 = "X";
+					}
 					else
 						B5.setForeground(Color.BLUE);
+						b5 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -289,12 +312,16 @@ public class TTT {
 				}
 				else {
 					B6.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B6.setForeground(Color.RED);
+						b6 = "X";
+					}
 					else
 						B6.setForeground(Color.BLUE);
+						b6 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -314,12 +341,16 @@ public class TTT {
 				}
 				else {
 				B7.setText(startGame);
-				if( startGame.equalsIgnoreCase("X"))
+				if( startGame.equalsIgnoreCase("X")) {
 					B7.setForeground(Color.RED);
+					b7 = "X";
+				}
 				else
 					B7.setForeground(Color.BLUE);
+					b7 = "O";
 				choosePlayer();
 				WonGame();
+				turn++;
 				}
 			}
 		});
@@ -339,12 +370,16 @@ public class TTT {
 				}
 				else {
 					B8.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B8.setForeground(Color.RED);
+						b8 = "X";
+					}
 					else
 						B8.setForeground(Color.BLUE);
+						b8 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
@@ -364,12 +399,16 @@ public class TTT {
 				}
 				else {
 					B9.setText(startGame);
-					if( startGame.equalsIgnoreCase("X"))
+					if( startGame.equalsIgnoreCase("X")) {
 						B9.setForeground(Color.RED);
+						b9 = "X";
+					}
 					else
 						B9.setForeground(Color.BLUE);
+						b9 = "O";
 					choosePlayer();
 					WonGame();
+					turn++;
 				}
 			}
 		});
