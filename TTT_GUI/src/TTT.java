@@ -23,15 +23,15 @@ public class TTT {
 	int turn;
 	
 	//Strings to keep track of what symbol is in what grid spot
-	String b1 = "";
-	String b2 = "";
-	String b3 = "";
-	String b4 = "";
-	String b5 = "";
-	String b6 = "";
-	String b7 = "";
-	String b8 = "";
-	String b9 = "";
+	String b1 = "N";
+	String b2 = "N";
+	String b3 = "N";
+	String b4 = "N";
+	String b5 = "N";
+	String b6 = "N";
+	String b7 = "N";
+	String b8 = "N";
+	String b9 = "N";
 	
 
 	/**
@@ -74,45 +74,78 @@ public class TTT {
 	{
 		
 		//All possible X wins
-		if( b1 == "X" && b2 == "X" && b3 =="X")
+		if( b1 == "X" && b2 == "X" && b3 =="X") {
 			winner = 1;
-		else if( b4 == "X" && b5 == "X" && b6 =="X")
+			System.out.print("X Win Condition 1");
+		}
+		else if( b4 == "X" && b5 == "X" && b6 =="X") {
 			winner = 1;
-		else if( b7 == "X" && b8 == "X" && b9 =="X")
+			System.out.print("X Win Condition 2");
+		}
+		else if( b7 == "X" && b8 == "X" && b9 =="X") {
 			winner = 1;
-		else if( b1 == "X" && b4 == "X" && b7 =="X")
+			System.out.print("X Win Condition 3");
+		}
+		else if( b1 == "X" && b4 == "X" && b7 =="X") {
 			winner = 1;
-		else if( b2 == "X" && b5 == "X" && b8 =="X")
+			System.out.print("X Win Condition 4");
+		}
+		else if( b2 == "X" && b5 == "X" && b8 =="X") {
 			winner = 1;
-		else if( b3 == "X" && b6 == "X" && b9 =="X")
+			System.out.print("X Win Condition 5");
+		}
+		else if( b3 == "X" && b6 == "X" && b9 =="X") {
 			winner = 1;
-		else if( b1 == "X" && b5 == "X" && b9 =="X")
+			System.out.print("X Win Condition 6");
+		}
+		else if( b1 == "X" && b5 == "X" && b9 =="X") {
 			winner = 1;
-		else if( b3 == "X" && b5 == "X" && b7 =="X")
+			System.out.print("X Win Condition 7");
+		}
+		else if( b3 == "X" && b5 == "X" && b7 =="X") {
 			winner = 1;
+			System.out.print("X Win Condition 8");
+		}
 		
 		//All possible O wins
-		else if( b1 == "O" && b2 == "O" && b3 =="O")
-			winner = 1;
-		else if( b4 == "O" && b5 == "O" && b6 =="O")
-			winner = 1;
-		else if( b7 == "O" && b8 == "O" && b9 =="O")
-			winner = 1;
-		else if( b1 == "O" && b4 == "O" && b7 =="O")
-			winner = 1;
-		else if( b2 == "O" && b5 == "O" && b8 =="O")
-			winner = 1;
-		else if( b3 == "O" && b6 == "O" && b9 =="O")
-			winner = 1;
-		else if( b1 == "O" && b5 == "O" && b9 =="O")
-			winner = 1;
-		else if( b3 == "O" && b5 == "O" && b7 =="O")
-			winner = 1;
+		else if( b1 == "O" && b2 == "O" && b3 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 1");
+		}
+		else if( b4 == "O" && b5 == "O" && b6 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 2");
+		}
+		else if( b7 == "O" && b8 == "O" && b9 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 3");
+		}
+		else if( b1 == "O" && b4 == "O" && b7 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 4");
+		}
+		else if( b2 == "O" && b5 == "O" && b8 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 5");
+		}
+		else if( b3 == "O" && b6 == "O" && b9 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 6");
+		}
+		else if( b1 == "O" && b5 == "O" && b9 =="O") {
+			winner = 2;
+			System.out.print("O Win Condition 7");
+		}
+		else if( b3 == "O" && b5 == "O" && b7 =="o") {
+			winner = 2;
+			System.out.print("X Win Condition 8");
+		}
 		
 		//If board is full, no one wins and winner value is 3
-		else if ((b1 == "" && b2 == "" && b3 == "" && b4 == "" && b5 == "" && b6 == "" && b7 == "" && b8 == "" && b9 == "") && (turn >= 1))
+		else if (turn >= 9) {
 			winner = 3;
-		
+			System.out.print("Board Full");
+		}
 		if( winner > 0)
 			displayWinner();
 	}
@@ -125,6 +158,12 @@ public class TTT {
 			JOptionPane.showMessageDialog( frame, "Player O Wins!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 		else if ( winner == 3)
 			JOptionPane.showMessageDialog( frame, "No player won. Board is full", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	//outputs value of a grid spot into console. This is for debugging.
+	public void val( int a, String b ) {
+		String c ="B" + a + " now is " +b + "\n";
+		System.out.printf(c);
 	}
 
 	
@@ -164,16 +203,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B1.getText() == "X" || B1.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B1 already has a value\n");
 				}
 				else {
 					B1.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B1.setForeground(Color.RED);
 						b1 = "X";
+						val(1,b1);
 					}
 					else
 						B1.setForeground(Color.BLUE);
 						b1 = "O";
+						val(1,b1);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -193,16 +235,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B2.getText() == "X" || B2.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B2 already has a value" + "\n");
 				}
 				else {
 					B2.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B2.setForeground(Color.RED);
 						b2 = "X";
+						val(2,b2);
 					}
 					else
 						B2.setForeground(Color.BLUE);
 						b2 = "O";
+						val(2,b2);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -222,16 +267,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B3.getText() == "X" || B3.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B3 already has a value" + "\n");
 				}
 				else {
 					B3.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B3.setForeground(Color.RED);
 						b3 = "X";
+						val(3,b3);
 					}
 					else
 						B3.setForeground(Color.BLUE);
 						b3 = "O";
+						val(3,b3);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -251,16 +299,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B4.getText() == "X" || B4.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B4 already has a value" + "\n");
 				}
 				else {
 					B4.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B4.setForeground(Color.RED);
 						b4 = "X";
+						val(4,b4);
 					}
 					else
 						B4.setForeground(Color.BLUE);
 						b4 = "O";
+						val(4,b4);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -280,16 +331,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B5.getText() == "X" || B5.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B5 already has a value" + "\n");
 				}
 				else {
 					B5.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B5.setForeground(Color.RED);
 						b5 = "X";
+						val(5,b5);
 					}
 					else
 						B5.setForeground(Color.BLUE);
 						b5 = "O";
+						val(5,b5);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -309,16 +363,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B6.getText() == "X" || B6.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B6 already has a value" + "\n");
 				}
 				else {
 					B6.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B6.setForeground(Color.RED);
 						b6 = "X";
+						val(6,b6);
 					}
 					else
 						B6.setForeground(Color.BLUE);
 						b6 = "O";
+						val(6,b6);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -338,16 +395,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B7.getText() == "X" || B7.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B7 already has a value" + "\n");
 				}
 				else {
 				B7.setText(startGame);
 				if( startGame.equalsIgnoreCase("X")) {
 					B7.setForeground(Color.RED);
 					b7 = "X";
+					val(7,b7);
 				}
 				else
 					B7.setForeground(Color.BLUE);
 					b7 = "O";
+					val(7,b7);
 				choosePlayer();
 				WonGame();
 				turn++;
@@ -367,16 +427,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B8.getText() == "X" || B8.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B8 already has a value" + "\n");
 				}
 				else {
 					B8.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B8.setForeground(Color.RED);
 						b8 = "X";
+						val(8,b8);
 					}
 					else
 						B8.setForeground(Color.BLUE);
 						b8 = "O";
+						val(8,b8);
 					choosePlayer();
 					WonGame();
 					turn++;
@@ -396,16 +459,19 @@ public class TTT {
 			public void actionPerformed(ActionEvent a) {
 				if ( B9.getText() == "X" || B9.getText() == "O") {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("B9 already has a value" + "\n");
 				}
 				else {
 					B9.setText(startGame);
 					if( startGame.equalsIgnoreCase("X")) {
 						B9.setForeground(Color.RED);
 						b9 = "X";
+						val(9,b9);
 					}
 					else
 						B9.setForeground(Color.BLUE);
 						b9 = "O";
+						val(9,b9);
 					choosePlayer();
 					WonGame();
 					turn++;
