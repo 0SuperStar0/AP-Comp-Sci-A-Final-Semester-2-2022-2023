@@ -1,17 +1,14 @@
 import java.awt.EventQueue;
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import javax.swing.JButton;
 import java.awt.Font;
 
-public class TTT {
+public class TTT implements ActionListener {
 
 	private JFrame frame;
 	
@@ -20,7 +17,7 @@ public class TTT {
 	//if winner = 1, game has been won by X. Else if winner = 2, game has been won by O. Else if winner = 3, board is full
 	int winner = 0;
 	//keeps track of turns
-	int turn;
+	int turn = 0;
 	
 	//Strings to keep track of what symbol is in what grid spot
 	String b1 = "N";
@@ -33,7 +30,26 @@ public class TTT {
 	String b8 = "N";
 	String b9 = "N";
 	
+	JButton B1 = new JButton("");
+	JButton B2 = new JButton("");
+	JButton B3 = new JButton("");
+	JButton B4 = new JButton("");
+	JButton B5 = new JButton("");
+	JButton B6 = new JButton("");
+	JButton B7 = new JButton("");
+	JButton B8 = new JButton("");
+	JButton B9 = new JButton("");
+	
+	//reset Detector
+	int resetDec = 0;
 
+	//Creating and Initializing MenuBar
+	JMenuBar menuBar = new JMenuBar();
+	JMenu menu = new JMenu("Menu");
+	JMenuItem Exit = new JMenuItem("Exit");
+	JMenuItem Reset = new JMenuItem("Reset");
+	JMenuItem Help = new JMenuItem("Help");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -142,7 +158,7 @@ public class TTT {
 		}
 		
 		//If board is full, no one wins and winner value is 3
-		else if (turn >= 9) {
+		else if (turn >= 8) {
 			winner = 3;
 			System.out.print("Board Full");
 		}
@@ -165,9 +181,7 @@ public class TTT {
 		String c ="B" + a + " now is " +b + "\n";
 		System.out.printf(c);
 	}
-
-	
-
+  
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -176,7 +190,19 @@ public class TTT {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));	    
+		
+		//Setting up menuBar
+		menu.add(Exit);
+		menu.add(Reset);
+		menu.add(Help);
+		menuBar.add(menu);
+		frame.setJMenuBar(menuBar);
+		
+		//Allowing Exit, Help and Reset to be pressed and that press detected.
+		Exit.addActionListener(this);
+		Help.addActionListener(this);
+		Reset.addActionListener(this);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -198,16 +224,19 @@ public class TTT {
 		panel.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JButton B1 = new JButton("");
 		B1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B1.getText() == "X" || B1.getText() == "O") {
+				if ( B1.getText() == "X" || B1.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B1 already has a value\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B1.setText(startGame);
@@ -235,16 +264,19 @@ public class TTT {
 		panel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		JButton B2 = new JButton("");
 		B2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B2.getText() == "X" || B2.getText() == "O") {
+				if ( B2.getText() == "X" || B2.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B2 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B2.setText(startGame);
@@ -272,16 +304,20 @@ public class TTT {
 		panel.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JButton B3 = new JButton("");
+
 		B3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B3.getText() == "X" || B3.getText() == "O") {
+				if ( B3.getText() == "X" || B3.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B3 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B3.setText(startGame);
@@ -309,16 +345,19 @@ public class TTT {
 		panel.add(panel_4);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
-		JButton B4 = new JButton("");
 		B4.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B4.getText() == "X" || B4.getText() == "O") {
+				if ( B4.getText() == "X" || B4.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B4 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B4.setText(startGame);
@@ -346,16 +385,19 @@ public class TTT {
 		panel.add(panel_5);
 		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		JButton B5 = new JButton("");
 		B5.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B5.getText() == "X" || B5.getText() == "O") {
+				if ( B5.getText() == "X" || B5.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B5 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B5.setText(startGame);
@@ -383,16 +425,19 @@ public class TTT {
 		panel.add(panel_6);
 		panel_6.setLayout(new BorderLayout(0, 0));
 		
-		JButton B6 = new JButton("");
 		B6.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B6.getText() == "X" || B6.getText() == "O") {
+				if ( B6.getText() == "X" || B6.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B6 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B6.setText(startGame);
@@ -420,16 +465,19 @@ public class TTT {
 		panel.add(panel_7);
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
-		JButton B7 = new JButton("");
 		B7.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B7.getText() == "X" || B7.getText() == "O") {
+				if ( B7.getText() == "X" || B7.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B7 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 				B7.setText(startGame);
@@ -457,16 +505,19 @@ public class TTT {
 		panel.add(panel_8);
 		panel_8.setLayout(new BorderLayout(0, 0));
 		
-		JButton B8 = new JButton("");
 		B8.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B8.getText() == "X" || B8.getText() == "O") {
+				if ( B8.getText() == "X" || B8.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B8 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B8.setText(startGame);
@@ -494,16 +545,19 @@ public class TTT {
 		panel.add(panel_9);
 		panel_9.setLayout(new BorderLayout(0, 0));
 		
-		JButton B9 = new JButton("");
 		B9.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B9.getText() == "X" || B9.getText() == "O") {
+				if ( B9.getText() == "X" || B9.getText() == "O" && (!(winner >= 1))) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B9 already has a value" + "\n");
 				}
 				else if (winner == 1 || winner == 2) {
 					JOptionPane.showMessageDialog( frame, "Game has already been won.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("Game has been won." + "\n");
+				}
+				else if( winner == 3) {
+					JOptionPane.showMessageDialog( frame, "No one won, board is full.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+					System.out.print("Board is full" + "\n");
 				}
 				else {
 					B9.setText(startGame);
@@ -526,5 +580,35 @@ public class TTT {
 		B9.setFont(new Font("Arial Black", Font.BOLD, 99));
 		panel_9.add(B9, BorderLayout.CENTER);
 	}
-
+	
+	public void actionPerformed(ActionEvent e) {    
+		if(e.getSource()==Exit) {
+			System.exit(0);
+		}		    
+		if(e.getSource()==Help) {
+			JOptionPane.showMessageDialog( frame, "Click on the middle of a grid to place your symbol there.\n It won't place your symbol if the game has been won, the board is full or a symbol is already there. \n Game is won when a straight line of three of the same symbol is made.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
+		} 
+		if(e.getSource()==Reset) {
+			b1 = "N";
+			b2 = "N";
+			b3 = "N";
+			b4 = "N";
+			b5 = "N";
+			b6 = "N";
+			b7 = "N";
+			b8 = "N";
+			b9 = "N";
+			
+			B1.setText(null);
+			B2.setText(null);
+			B3.setText(null);
+			B4.setText(null);
+			B5.setText(null);
+			B6.setText(null);
+			B7.setText(null);
+			B8.setText(null);
+			B9.setText(null);
+		}
+		
+	}
 }
