@@ -40,8 +40,6 @@ public class TTT implements ActionListener {
 	JButton B8 = new JButton("");
 	JButton B9 = new JButton("");
 	
-	//reset Detector
-	int resetDec = 0;
 
 	//Creating and Initializing MenuBar
 	JMenuBar menuBar = new JMenuBar();
@@ -608,6 +606,9 @@ public class TTT implements ActionListener {
 			B7.setText(null);
 			B8.setText(null);
 			B9.setText(null);
+			
+			winner = 0;
+			turn = 0;
 		}
 		
 	}
