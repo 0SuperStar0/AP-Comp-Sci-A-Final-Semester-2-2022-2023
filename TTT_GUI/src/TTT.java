@@ -30,6 +30,7 @@ public class TTT implements ActionListener {
 	String b8 = "N";
 	String b9 = "N";
 	
+	//Initializing all the 9 buttons
 	JButton B1 = new JButton("");
 	JButton B2 = new JButton("");
 	JButton B3 = new JButton("");
@@ -83,6 +84,7 @@ public class TTT implements ActionListener {
 	
 	/**
 	 * Method to check if someone has won
+	 * All "System.out.print("Symbol Win Condition #") was for debugging
 	 */
 	public void WonGame()
 	{
@@ -92,74 +94,75 @@ public class TTT implements ActionListener {
 			winner = 1;
 			System.out.print("X Win Condition 1");
 		}
-		else if( b4 == "X" && b5 == "X" && b6 =="X") {
+		if( b4 == "X" && b5 == "X" && b6 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 2");
 		}
-		else if( b7 == "X" && b8 == "X" && b9 =="X") {
+		if( b7 == "X" && b8 == "X" && b9 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 3");
 		}
-		else if( b1 == "X" && b4 == "X" && b7 =="X") {
+		if( b1 == "X" && b4 == "X" && b7 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 4");
 		}
-		else if( b2 == "X" && b5 == "X" && b8 =="X") {
+		if( b2 == "X" && b5 == "X" && b8 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 5");
 		}
-		else if( b3 == "X" && b6 == "X" && b9 =="X") {
+		if( b3 == "X" && b6 == "X" && b9 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 6");
 		}
-		else if( b1 == "X" && b5 == "X" && b9 =="X") {
+		if( b1 == "X" && b5 == "X" && b9 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 7");
 		}
-		else if( b3 == "X" && b5 == "X" && b7 =="X") {
+		if( b3 == "X" && b5 == "X" && b7 =="X") {
 			winner = 1;
 			System.out.print("X Win Condition 8");
 		}
 		
 		//All possible O wins
-		else if( b1 == "O" && b2 == "O" && b3 =="O") {
+		if( b1 == "O" && b2 == "O" && b3 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 1");
 		}
-		else if( b4 == "O" && b5 == "O" && b6 =="O") {
+		if( b4 == "O" && b5 == "O" && b6 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 2");
 		}
-		else if( b7 == "O" && b8 == "O" && b9 =="O") {
+		if( b7 == "O" && b8 == "O" && b9 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 3");
 		}
-		else if( b1 == "O" && b4 == "O" && b7 =="O") {
+		if( b1 == "O" && b4 == "O" && b7 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 4");
 		}
-		else if( b2 == "O" && b5 == "O" && b8 =="O") {
+		if( b2 == "O" && b5 == "O" && b8 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 5");
 		}
-		else if( b3 == "O" && b6 == "O" && b9 =="O") {
+		if( b3 == "O" && b6 == "O" && b9 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 6");
 		}
-		else if( b1 == "O" && b5 == "O" && b9 =="O") {
+		if( b1 == "O" && b5 == "O" && b9 =="O") {
 			winner = 2;
 			System.out.print("O Win Condition 7");
 		}
-		else if( b3 == "O" && b5 == "O" && b7 =="o") {
+		if( b3 == "O" && b5 == "O" && b7 =="O") {
 			winner = 2;
 			System.out.print("X Win Condition 8");
 		}
 		
 		//If board is full, no one wins and winner value is 3
-		else if (turn >= 8) {
+		if ((turn >= 8) && (!(winner == 1)) && (!(winner == 2))) {
 			winner = 3;
 			System.out.print("Board Full");
 		}
+		//just displays the winner or if board is full
 		if( winner > 0)
 			displayWinner();
 	}
@@ -168,9 +171,9 @@ public class TTT implements ActionListener {
 	public void displayWinner() {
 		if ( winner == 1)
 			JOptionPane.showMessageDialog( frame, "Player X Wins!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
-		else if ( winner == 2)
+		if ( winner == 2)
 			JOptionPane.showMessageDialog( frame, "Player O Wins!", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
-		else if ( winner == 3)
+		if ( winner == 3)
 			JOptionPane.showMessageDialog( frame, "No player won. Board is full", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 	}
 
@@ -224,7 +227,7 @@ public class TTT implements ActionListener {
 		
 		B1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B1.getText() == "X" || B1.getText() == "O" && (!(winner >= 1))) {
+				if ( (B1.getText() == "X" || B1.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B1 already has a value\n");
 				}
@@ -264,7 +267,7 @@ public class TTT implements ActionListener {
 		
 		B2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B2.getText() == "X" || B2.getText() == "O" && (!(winner >= 1))) {
+				if ( (B2.getText() == "X" || B2.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B2 already has a value" + "\n");
 				}
@@ -305,7 +308,7 @@ public class TTT implements ActionListener {
 
 		B3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B3.getText() == "X" || B3.getText() == "O" && (!(winner >= 1))) {
+				if ( (B3.getText() == "X" || B3.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B3 already has a value" + "\n");
 				}
@@ -345,7 +348,7 @@ public class TTT implements ActionListener {
 		
 		B4.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B4.getText() == "X" || B4.getText() == "O" && (!(winner >= 1))) {
+				if ( (B4.getText() == "X" || B4.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B4 already has a value" + "\n");
 				}
@@ -385,7 +388,7 @@ public class TTT implements ActionListener {
 		
 		B5.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B5.getText() == "X" || B5.getText() == "O" && (!(winner >= 1))) {
+				if ( (B5.getText() == "X" || B5.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B5 already has a value" + "\n");
 				}
@@ -425,7 +428,7 @@ public class TTT implements ActionListener {
 		
 		B6.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B6.getText() == "X" || B6.getText() == "O" && (!(winner >= 1))) {
+				if ( (B6.getText() == "X" || B6.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B6 already has a value" + "\n");
 				}
@@ -465,7 +468,7 @@ public class TTT implements ActionListener {
 		
 		B7.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B7.getText() == "X" || B7.getText() == "O" && (!(winner >= 1))) {
+				if ( (B7.getText() == "X" || B7.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B7 already has a value" + "\n");
 				}
@@ -505,7 +508,7 @@ public class TTT implements ActionListener {
 		
 		B8.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B8.getText() == "X" || B8.getText() == "O" && (!(winner >= 1))) {
+				if ( (B8.getText() == "X" || B8.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B8 already has a value" + "\n");
 				}
@@ -545,7 +548,7 @@ public class TTT implements ActionListener {
 		
 		B9.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a) {
-				if ( B9.getText() == "X" || B9.getText() == "O" && (!(winner >= 1))) {
+				if ( (B9.getText() == "X" || B9.getText() == "O") && (!(winner >= 1)) && (!(winner <= 3)) ) {
 					JOptionPane.showMessageDialog( frame, "Symbol already there.", "Tic Tac Toe", JOptionPane.INFORMATION_MESSAGE);
 					System.out.print("B9 already has a value" + "\n");
 				}
